@@ -13,8 +13,8 @@ var (
 
 // file info
 type File struct {
-	Name     string
-	Location string
+	Name     string `json:"name"`
+	Location string `json:"-"`
 }
 
 // [uuid]FileInfo
