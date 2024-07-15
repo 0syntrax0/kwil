@@ -4,6 +4,6 @@ import "kwil/api/memcache"
 
 // api json response fields
 type FileFetchAllResp struct {
-	UID  string
-	Data memcache.File
+	UID  string        `json:"uid"`
+	Data memcache.File `json:"data"`
 }
