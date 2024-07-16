@@ -1,13 +1,10 @@
 # syntax=docker/dockerfile:1
 
 # Start from golang base image
-FROM golang:alpine as builder
+FROM golang:1.22-alpine
 
 # Add Maintainer info
 LABEL maintainer="Carlos Saavedra <c.saavedra85@hotmail.com>"
-
-# Install git.
-RUN apk update && apk add --no-cache git
 
 # Set the current working directory inside the container 
 WORKDIR /api
@@ -16,25 +13,13 @@ WORKDIR /api
 COPY go.mod go.sum ./
 
 # Download all dependencies. Dependencies will be cached if the go.mod and the go.sum files are not changed 
-RUN go mod download 
+RUN go mod download
 
 # Copy the source from the current directory to the working Directory inside the container 
 COPY . .
 
-# Build the Go app
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
+# Build the executable
+RUN go build -o ./build/dist .
 
-# Start a new stage from scratch
-FROM alpine:latest
-RUN apk --no-cache add ca-certificates
-
-WORKDIR /root/
-
-# Copy the Pre-built binary file from the previous stage. Observe we also copied an `.env` file
-COPY --from=builder /api/main .
-
-# Expose port 8080 to the outside world
-EXPOSE 8080
-
-#Command to run the executable
-CMD ["./main"]
+# Run the executable
+CMD ./build/dist
