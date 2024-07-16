@@ -12,16 +12,18 @@ Run make command `make up` to build and start project.
 
 ## End Points
 
+When working locally use `http://localhost:8080`, when using postman to test on live site use `https://kwil-production.up.railway.app/`.
+
 ### Upload File
 
 - Method `POST`
-- Url `http://localhost:8080/file`
+- Url `https://kwil-production.up.railway.app/file`
 - With `form-data` in the body and field `file`
 
 #### Sample Payload
 
 ```curl
-curl -X POST http://localhost:8080/file \
+curl -X POST https://kwil-production.up.railway.app/file \
   -F "file=@/Users/LOCAL_USER_NAME/PATH_TO_FILE" \
   -H "Content-Type: multipart/form-data"
 ```
@@ -40,7 +42,7 @@ To be used to retreive later.
 ### Fetch Given File
 
 - Method `GET`
-- URL `http://localhost:8080/file/:uuid`
+- URL `https://kwil-production.up.railway.app/file/:uuid`
 
 #### Sample Response
 
@@ -49,7 +51,7 @@ The fetched file will be forced downloaded into the browser.
 ### Fetch All Available Files
 
 - Method `GET`
-- Url `http://localhost:8080/file/`
+- Url `https://kwil-production.up.railway.app/file/`
 
 #### Sample Response
 
