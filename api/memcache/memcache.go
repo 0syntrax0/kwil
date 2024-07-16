@@ -15,6 +15,7 @@ var (
 type File struct {
 	Name     string `json:"name"`
 	Location string `json:"-"`
+	Size     int64  `json:"size"`
 }
 
 // [uuid]FileInfo

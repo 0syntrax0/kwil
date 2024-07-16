@@ -56,6 +56,7 @@ func (a *API) fileCreate(c *gin.Context) {
 	a.Memcache.Insert(fName, memcache.File{
 		Name:     filename,
 		Location: fileSaveLoc + filename,
+		Size:     file.Size,
 	})
 
 	// return file name
